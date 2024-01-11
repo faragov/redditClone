@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Reddit</title>
+    <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<a href="/submit">Submit new post</a>
+
+<h3>Trending posts</h3>
+
+<table>
+    <tr th:each="post: ${posts}">
+        <td th:text="${post.getNumberOfLikes()}"></td>
+        <td><a th:href="|/download?postId=${post.getId()}|">-</a></td>
+        <td><a th:href="|/upload?postId=${post.getId()}|">+</a></td>
+        <td><a th:href="${post.getUrl}" th:text="${post.getTitle()}"></a></td>
+    </tr>
+</table>
+
+<a href="/moreposts">Click for more</a>
+
+<form class="form-row" action="/contains" method="post">
+    <label for="text"></label>
+    <input type="text" name="search" id="text" placeholder="Search"/>
+    <button type="submit">Search</button>
+</form>
+
+</body>
+</html>
